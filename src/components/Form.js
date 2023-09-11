@@ -32,6 +32,14 @@ const Form = () => {
       duration: enteredInvestmentDuration
     }
     console.log(savingsData)
+    resetHandler()
+  }
+
+  const resetHandler = () => {
+    setCurrentSavings("")
+    setYearlySavings("")
+    setExpectedInterest("")
+    setInvestmentDuration("")
   }
 
   return (
@@ -78,7 +86,7 @@ const Form = () => {
         </p>
       </div>
       <p className="actions">
-        <button type="reset" className="buttonAlt">
+        <button type="reset" onClick={resetHandler} className="buttonAlt">
           Reset
         </button>
         <button type="submit" className="button">
