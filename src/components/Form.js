@@ -1,6 +1,6 @@
 import React, {useState} from "react"
 
-const Form = () => {
+const Form = (props) => {
   const [enteredCurrentSavings, setCurrentSavings] = useState("")
   const [enteredYearlySavings, setYearlySavings] = useState("")
   const [enteredExpectedInterest, setExpectedInterest] = useState("")
@@ -25,13 +25,13 @@ const Form = () => {
   const submitHandler = (event) => {
     event.preventDefault()
 
-    const savingsData = {
+    const savingData = {
       current: enteredCurrentSavings,
       yearly: enteredYearlySavings,
       interest: enteredExpectedInterest,
       duration: enteredInvestmentDuration
     }
-    console.log(savingsData)
+    props.onSaveData(savingData)
     resetHandler()
   }
 
