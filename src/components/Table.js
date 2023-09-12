@@ -1,8 +1,10 @@
 import React from "react"
 
+import styles from "./Table.module.css"
+
 const Table = () => {
   return (
-    <table className="result">
+    <table className={styles.result}>
       <thead>
         <tr>
           <th>Year</th>
