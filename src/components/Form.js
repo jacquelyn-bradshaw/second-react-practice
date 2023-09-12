@@ -8,20 +8,16 @@ const Form = (props) => {
   const [enteredExpectedInterest, setExpectedInterest] = useState("")
   const [enteredInvestmentDuration, setInvestmentDuration] = useState("")
 
-  const currentSavingsChangeHandler = (event) => {
-    setCurrentSavings(event.target.value)
-  }
-
-  const yearlySavingsChangeHandler = (event) => {
-    setYearlySavings(event.target.value)
-  }
-  
-  const expectedInterestChangeHandler = (event) => {
-    setExpectedInterest(event.target.value)
-  }
-
-  const investmentDurationChangeHandler = (event) => {
-    setInvestmentDuration(event.target.value)
+  const inputChangeHandler = (input, value) => {
+    if (input === "current-savings") {
+      setCurrentSavings(value)
+    } else if (input === "yearly-contribution") {
+      setYearlySavings(value)
+    } else if (input === "expected-return") {
+      setExpectedInterest(value)
+    } else {
+      setInvestmentDuration(value)
+    }
   }
 
   const submitHandler = (event) => {
@@ -52,7 +48,9 @@ const Form = (props) => {
           <input
             type="number"
             value={enteredCurrentSavings}
-            onChange={currentSavingsChangeHandler}
+            onChange={(event) => 
+              inputChangeHandler("current-savings", event.target.value)
+            }
             id="current-savings"
           />
         </p>
@@ -61,7 +59,9 @@ const Form = (props) => {
           <input
             type="number"
             value={enteredYearlySavings}
-            onChange={yearlySavingsChangeHandler}
+            onChange={(event) => 
+              inputChangeHandler("yearly-contribution", event.target.value)
+            }
             id="yearly-contribution"
           />
         </p>
@@ -74,7 +74,9 @@ const Form = (props) => {
           <input
             type="number"
             value={enteredExpectedInterest}
-            onChange={expectedInterestChangeHandler}
+            onChange={(event) => 
+              inputChangeHandler("expected-return", event.target.value)
+            }
             id="expected-return" />
         </p>
         <p>
@@ -82,7 +84,9 @@ const Form = (props) => {
           <input
             type="number"
             value={enteredInvestmentDuration}
-            onChange={investmentDurationChangeHandler}
+            onChange={(event) => 
+              inputChangeHandler("duration", event.target.value)
+            }
             id="duration"
           />
         </p>
