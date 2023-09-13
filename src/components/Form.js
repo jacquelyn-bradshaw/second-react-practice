@@ -2,42 +2,34 @@ import React, {useState} from "react"
 
 import styles from "./Form.module.css"
 
+const initialUserInput = {
+  "current-savings": 10000,
+  "yearly-contribution": 1200,
+  "expected-return": 7,
+  duration: 10
+}
+
 const Form = (props) => {
-  const [enteredCurrentSavings, setCurrentSavings] = useState("")
-  const [enteredYearlySavings, setYearlySavings] = useState("")
-  const [enteredExpectedInterest, setExpectedInterest] = useState("")
-  const [enteredInvestmentDuration, setInvestmentDuration] = useState("")
+  const [userInput, setUserInput] = useState(initialUserInput)
 
   const inputChangeHandler = (input, value) => {
-    if (input === "current-savings") {
-      setCurrentSavings(value)
-    } else if (input === "yearly-contribution") {
-      setYearlySavings(value)
-    } else if (input === "expected-return") {
-      setExpectedInterest(value)
-    } else {
-      setInvestmentDuration(value)
-    }
+    setUserInput((prevInput) => {
+      return {
+        ...prevInput,
+        [input]: value
+      }
+    })
   }
 
   const submitHandler = (event) => {
     event.preventDefault()
 
-    const savingData = {
-      current: enteredCurrentSavings,
-      yearly: enteredYearlySavings,
-      interest: enteredExpectedInterest,
-      duration: enteredInvestmentDuration
-    }
-    props.onSaveData(savingData)
+    props.onCalculate(userInput)
     resetHandler()
   }
 
   const resetHandler = () => {
-    setCurrentSavings("")
-    setYearlySavings("")
-    setExpectedInterest("")
-    setInvestmentDuration("")
+    setUserInput(initialUserInput)
   }
 
   return (
@@ -47,7 +39,7 @@ const Form = (props) => {
           <label htmlFor="current-savings">Current Savings ($)</label>
           <input
             type="number"
-            value={enteredCurrentSavings}
+            value={userInput["current-savings"]}
             onChange={(event) => 
               inputChangeHandler("current-savings", event.target.value)
             }
@@ -58,7 +50,7 @@ const Form = (props) => {
           <label htmlFor="yearly-contribution">Yearly Savings ($)</label>
           <input
             type="number"
-            value={enteredYearlySavings}
+            value={userInput["yearly-contribution"]}
             onChange={(event) => 
               inputChangeHandler("yearly-contribution", event.target.value)
             }
@@ -73,7 +65,7 @@ const Form = (props) => {
           </label>
           <input
             type="number"
-            value={enteredExpectedInterest}
+            value={userInput["expected-return"]}
             onChange={(event) => 
               inputChangeHandler("expected-return", event.target.value)
             }
@@ -83,7 +75,7 @@ const Form = (props) => {
           <label htmlFor="duration">Investment Duration (years)</label>
           <input
             type="number"
-            value={enteredInvestmentDuration}
+            value={userInput.duration}
             onChange={(event) => 
               inputChangeHandler("duration", event.target.value)
             }

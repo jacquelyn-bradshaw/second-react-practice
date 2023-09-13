@@ -42,14 +42,14 @@ function App() {
         id: Math.random().toString()
       }
       console.log(savingsData)
-      calculateHandler(savingsData)
+      //calculateHandler(savingsData)
   }
 
   return (
     <div>
       <Header/>
       <Form
-        onSaveData={saveDataHandler}  
+        onCalculate={saveDataHandler}  
       />
       {!yearlyData.length === 0 && (<Table/>)}
       {yearlyData.length === 0 && (<h2>No savings found.</h2>)}
