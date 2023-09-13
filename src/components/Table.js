@@ -2,7 +2,7 @@ import React from "react"
 
 import styles from "./Table.module.css"
 
-const Table = () => {
+const Table = (props) => {
   return (
     <table className={styles.result}>
       <thead>
@@ -16,7 +16,7 @@ const Table = () => {
       </thead>
       <tbody>
         <tr>
-          <td>YEAR NUMBER</td>
+          <td></td>
           <td>TOTAL SAVINGS END OF YEAR</td>
           <td>INTEREST GAINED IN YEAR</td>
           <td>TOTAL INTEREST GAINED</td>

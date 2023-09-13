@@ -1,22 +1,23 @@
+import React, {useState} from "react";
+
 import Header from "./components/Header"
 import Form from "./components/Form"
 import Table from "./components/Table"
 
 function App() {
-
-  const yearlyData = []; // per-year results
+  const [userInput, setUserInput] = useState(null)
 
   const calculateHandler = (userInput) => {
+    setUserInput(userInput)
+  }
+  
+  const yearlyData = []
 
-    let currentSavings = +userInput.current;
-    const yearlyContribution = +userInput.yearly;
-    const expectedReturn = +userInput.interest / 100;
+  if(userInput) {
+    let currentSavings = +userInput["current-savings"];
+    const yearlyContribution = +userInput["yearly-contribution"];
+    const expectedReturn = +userInput["expected-return"] / 100;
     const duration = +userInput.duration;
-
-    console.log("CS" + currentSavings)
-    console.log("YS" + yearlyContribution)
-    console.log("ER" + expectedReturn)
-    console.log("D" + duration)
 
     // The below code calculates yearly results (total savings, interest etc)
     for (let i = 0; i < duration; i++) {
@@ -30,29 +31,16 @@ function App() {
         yearlyContribution: yearlyContribution,
       });
     }
-
-    console.log("YD" + yearlyData.savingsEndOfYear)
-
-    // do something with yearlyData ...
   };
 
-  const saveDataHandler = (enteredSavingsData) => {
-      const savingsData = {
-        ...enteredSavingsData,
-        id: Math.random().toString()
-      }
-      console.log(savingsData)
-      //calculateHandler(savingsData)
-  }
+  console.log(yearlyData)
 
   return (
     <div>
       <Header/>
-      <Form
-        onCalculate={saveDataHandler}  
-      />
-      {!yearlyData.length === 0 && (<Table/>)}
-      {yearlyData.length === 0 && (<h2>No savings found.</h2>)}
+      <Form onCalculate={calculateHandler}  />
+      {userInput && (<Table data={yearlyData}/>)}
+      {!userInput && (<p>No investment calculated yet.</p>)}
     </div>
   );
 }
