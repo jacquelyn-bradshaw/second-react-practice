@@ -2,6 +2,13 @@ import React from "react"
 
 import styles from "./Table.module.css"
 
+const formatter = new Intl.NumberFormat("en-UK", {
+  style: "currency",
+  currency: "GBP",
+  mimumumFractionDigits:2,
+  maximumFractionDigits: 2
+})
+
 const Table = (props) => {
   return (
     <table className={styles.result}>
@@ -15,13 +22,23 @@ const Table = (props) => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td></td>
-          <td>TOTAL SAVINGS END OF YEAR</td>
-          <td>INTEREST GAINED IN YEAR</td>
-          <td>TOTAL INTEREST GAINED</td>
-          <td>TOTAL INVESTED CAPITAL</td>
-        </tr>
+        {props.data.map((yearData) => (
+          <tr key={yearData.year}>
+            <td>{yearData.year}</td>
+            <td>{formatter.format(yearData.savingsEndOfYear)}</td>
+            <td>{formatter.format(yearData.yearlyInterest)}</td>
+            <td>
+              {formatter.format(yearData.savingsEndOfYear -
+              props.initialInvestment -
+              yearData.yearlyContribution *
+              yearData.year)}</td>
+            <td>
+              {formatter.format(props.initialInvestment +
+              yearData.yearlyContribution *
+              yearData.year)}
+            </td>
+          </tr>
+        ))}
       </tbody>
     </table>
   )

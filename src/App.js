@@ -33,14 +33,12 @@ function App() {
     }
   };
 
-  console.log(yearlyData)
-
   return (
     <div>
       <Header/>
       <Form onCalculate={calculateHandler}  />
-      {userInput && (<Table data={yearlyData}/>)}
-      {!userInput && (<p>No investment calculated yet.</p>)}
+      {!userInput && <p>No investment calculated yet.</p>}
+      {userInput && <Table data={yearlyData} initialInvestment={userInput["current-savings"]}/>}
     </div>
   );
 }
