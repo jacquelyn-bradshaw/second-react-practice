@@ -1,4 +1,7 @@
 # second-react-practice
+- An investment calculator where you can enter data about your planned investment
+- Calculates a table of results for your investment
+
 Prerequisites
 - You will need the following installed on your machine:
   - git
